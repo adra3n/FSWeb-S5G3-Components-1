@@ -115,3 +115,61 @@ const data = [
   Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
   Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
 */
+
+
+const haberYapici = (baslik, tarih, ilkParagraf, ikinciParagraf, ucuncuParagraf) => {
+  const article = document.createElement("div");
+  article.classList.add("article");
+
+  const baslikAdi = document.createElement("h2");
+  baslikAdi.textContent = baslik;
+  article.append(baslikAdi);
+
+  const haberTarihi = document.createElement("p");
+  haberTarihi.textContent = tarih;
+  haberTarihi.classList.add("tarih")
+  article.append(haberTarihi);
+
+  const p1Ogesi = document.createElement("p");
+  p1Ogesi.textContent = ilkParagraf;
+  article.append(p1Ogesi);
+
+  const p2Ogesi = document.createElement("p");
+  p2Ogesi.textContent = ikinciParagraf;
+  article.append(p2Ogesi);
+
+  const p3Ogesi = document.createElement("p");
+  p3Ogesi.textContent = ucuncuParagraf;
+  article.append(p3Ogesi);
+
+  const expand = document.createElement("span");
+  expand.textContent = "+";
+  expand.classList.add("expandButton");
+  article.append(expand);
+  expand.addEventListener("click", () => {
+    article.classList.toggle("article-open");
+  });
+
+  return article;
+}
+
+const haberListele = () => {
+  const haberContainer = document.querySelector(".articles");
+
+  data.forEach(haberIcerik => {
+    const haber = haberYapici(
+      haberIcerik.baslik,
+      haberIcerik.tarih,
+      haberIcerik.ilkParagraf,
+      haberIcerik.ikinciParagraf,
+      haberIcerik.ucuncuParagraf
+    );
+    haberContainer.append(haber);
+  });
+
+}
+
+haberListele();
+
+
+//yazıyla çakışıyor diye haberler.js içinde .expandbutton'a left: 95% verdim.
